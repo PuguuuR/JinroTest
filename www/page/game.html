@@ -1,0 +1,29 @@
+<ons-page ng-controller="gameCtrl as gameCl">
+    <ons-toolbar>
+      <div class="left" ng-click="gameCl.backTop()">
+        <ons-toolbar-button>
+          <ons-icon icon="ion-close-round" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        人狼役職診断
+      </div>
+      <div class="right">
+				{{gameCl.data.currentNum + 1}} / {{gameCl.data.totalNum}} 問目
+			</div>
+    </ons-toolbar>
+    <div class="question">
+      <p>
+        {{gameCl.data.question}}
+      </p>
+    </div>
+    <div class="answer">
+      <ons-row ng-repeat="answer in gameCl.data.answer track by $index">
+        <ons-col>
+          <div style="margin:5px">
+            <ons-button ng-click="gameCl.nextQ($index)">{{answer}}</ons-button>
+          </div>
+        </ons-col>
+      </ons-row>
+		</div>
+</ons-page>

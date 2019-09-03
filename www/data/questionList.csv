@@ -1,0 +1,5 @@
+#質問,回答1,回答2,回答3,回答1の結果,回答2の結果,回答3の結果
+生まれ変わるなら？,男,女,,reborn:1,reborn:-1
+嘘はついてもいい？,どんな嘘もだめ,ついていいときもある,,lierPermit:1,lierPermit:-1
+好きな陣営は？,人狼,村人,妖狐,kyotyo:1|poker:2|buttle:2,kyotyo:3|poker:-2|buttle:-1,kyotyo:-1|poker:2|buttle:2
+好きな仕事は？,プロレスラー,殺し屋,ニート,buttle:3,poker:1,sekinin:-4
