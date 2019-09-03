@@ -45,11 +45,50 @@ onsModule.factory('CsvDataService', function() {
       return allData;
     },
 
-    //test
-    getHoge : function() {
-      return "hoge";
-    }
+    //パラメータリストを作成する
+    getParameterList: function() {
+      var paramObj = {};
+      var linesData = getDataFromCsvBase("data/parameterList.csv");
 
+      for (i = 1,iLen = linesData.length; i < iLen; i++) {
+        //1行ごとに区切り文字ごとで配列データを取得(1行目はタイトルなのでスキップ)
+        var splitData = linesData[i].split(",");
+        for (j = 0,jLen = splitData.length; j < jLen; j++) {
+          var dataCore = splitData[j].split("|");
+          paramObj[dataCore[0]] = dataCore[1];
+        }
+      }
+      return paramObj;
+    },
+
+    //役職診断パラメータを作成する
+    getJinroRoleParam: function(paramStatus) {
+
+      var jinroRolePointList = {};//役職診断パラメータ
+      var linesData = getDataFromCsvBase("data/jinroRoleParam.csv");
+
+      for (i = 1,iLen = linesData.length; i < iLen; i++) {
+        //役職ごとに計算
+        var splitData = linesData[i].split(",");
+        var paramData = splitData[1].split("|");
+
+        var pointByRole = 0;//初期値
+        for (k = 0,kLen = paramData.length; k < kLen; k++) {
+          //パラメータごとに計算
+          var paramCore = paramData[k].split(":");
+          var paramKey = paramCore[0];
+          var paramValue = paramCore[1];
+
+          //役職ポイントを計算
+          var nowParam = paramStatus[paramKey];
+          var culcPoint = parseFloat(nowParam) * parseFloat(paramValue);//役職パラメータを元に役職ポイントを計算
+          pointByRole += culcPoint;
+        }
+        //役職名と役職ポイントを格納
+        jinroRolePointList[splitData[0]] = pointByRole;
+      }
+      return jinroRolePointList;
+    }
   }//return close
 
   //指定したCSVを込みこんで改行ごとデータを返す

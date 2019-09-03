@@ -1,0 +1,15 @@
+<ons-page ng-controller="resultCtrl as resultCl">
+  <ons-toolbar>
+    <div class="left" ng-click="resultCl.backTop()">
+      <ons-toolbar-button>
+        <ons-icon icon="ion-close-round" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+    <div class="center">
+      診断結果
+    </div>
+  </ons-toolbar>
+  <div>
+    あなたの適正役職は ： {{resultCl.roleName}}
+  </div>
+</ons-page>
