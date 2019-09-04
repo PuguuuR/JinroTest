@@ -9,7 +9,18 @@
       診断結果
     </div>
   </ons-toolbar>
-  <div>
+  <div class="resultRole">
     あなたの適正役職は ： {{resultCl.roleName}}
+  </div>
+  <br>
+  <canvas id="radar" class="chart chart-radar"
+    chart-data="resultCl.data"
+    chart-options="resultCl.options"
+    chart-dataset-override="resultCl.datasets"
+    chart-labels="resultCl.labels">
+  </canvas>
+  <br><br>
+  <div class="center">
+    <img class="jinroRoleImage" ng-src="image/jinroRole_{{resultCl.roleImage}}.jpg" />
   </div>
 </ons-page>

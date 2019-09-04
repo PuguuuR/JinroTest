@@ -1,5 +1,5 @@
 //angular module(onsenUI)の定義
-var onsModule = ons.bootstrap(['onsen'])
+var onsModule = ons.bootstrap(['onsen','chart.js'])
 
 //コントローラー定義
 
@@ -76,6 +76,43 @@ onsModule.controller('gameCtrl',function(CsvDataService,ParameterService) {
 onsModule.controller('resultCtrl', function() {
   var takeOverData = mainNavigator.topPage.data;//前画面の情報を引き継ぐ(roleName,rolePoint)
   this.roleName = takeOverData.roleName;//役職名をバインディング
+  var jinroRolePoint = takeOverData.rolePoint;//役職ポイントリストを取得
+
+  var chartLabel = [];
+  var chartData = [];
+
+  //役職ポイントをチャート用データに格納する
+  for(key in jinroRolePoint) {
+    chartLabel.push(key);
+    chartData.push(jinroRolePoint[key]);
+  }
+
+  this.labels = chartLabel;//チャート定義ラベルをバインディング
+  //チャート定義値をバインディング
+  this.data = [
+    chartData
+  ];
+  this.datasets = [
+    {
+    backgroundColor: "rgba(255,99,52,0.2)"  //背景色
+    }
+  ];
+  this.options = {
+    responsive: true
+  };
+
+  //役職名と役職画像名の紐づけ用リスト
+  var roleImageList = {
+    "人狼":"jinro",
+    "占い師":"uranaishi",
+    "騎士":"kishi",
+    "村人":"jinro",
+    "猫又":"jinro",
+    "狂人":"kyojin",
+    "妖狐":"youko"
+  }
+  this.roleImage = roleImageList[takeOverData.roleName];//役職画像名をバインディング
+
   this.backTop = function(){
     mainNavigator.pushPage('page/top.html');//トップへ戻る
   }
